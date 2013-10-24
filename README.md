@@ -19,21 +19,23 @@ Instead of learning a third party framework like Phonegap and hoping they have s
 
 1. `bundle install`
 2. `bundle exec rake -T`
-3. `bundle exec rake build`
+3. Edit your web content in the `/static` directory.
+3. `bundle exec rake build_static`
+4. Launch through Xcode or `bundle exec sim`
 
 Lots of automation here:
 
 ```
-rake ios:build                   # Build the application
-rake ios:build_static            # Builds content from /static and copies it into the iOS app
-rake ios:clean                   # Clean the build
-rake ios:deploy                  # Upload ipa to testflight
-rake ios:next_version            # Bumps the bundle version in preparation of the build
-rake ios:notify_campfire         # Notify the dojo4 campfire of the Testflight release
-rake ios:re_ship                 # Re-compiles and ships current version of the app
-rake ios:release_build           # Build the release config of the app
-rake ios:ship_it                 # Performs all the tasks for a deployment to Testflight
-rake ios:sign                    # Signs the app with the provisioning profile
-rake ios:sim                     # Runs the app in the iOS simulator
-rake ios:tag                     # Tag the build
+rake build            # Build the application
+rake build_static     # Builds content from /static and copies it into the iOS app
+rake clean            # Clean the build
+rake deploy           # Upload ipa to testflight
+rake next_version     # Bumps the bundle version in preparation of the build
+rake notify_campfire  # Notify campfire of the Testflight release
+rake re_ship          # Re-compiles and ships current version of the app
+rake release_build    # Build the release config of the app
+rake ship_it          # Performs all the tasks for a deployment to Testflight
+rake sign             # Signs the app with the provisioning profile
+rake sim              # Runs the app in the iOS simulator TODO
+rake tag              # Tag the build
 ```

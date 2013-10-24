@@ -17,18 +17,36 @@
       bridge.callHandler('testflightLog', 'WebViewJavascriptBridgeReady event occurred. Ready to rock...');
 
       bridge.callHandler('confirm', 'Would you like to see your device name?', function(answer){
-        if (answer) {
+        if (answer === "true") {
           bridge.callHandler('getDeviceName', {}, function(deviceName){
             bridge.callHandler('alert', 'Your device name is = ' + deviceName);
           });
         }
       });
+
+      document.getElementById('facebookShareBtn').addEventListener('click', function(){
+        bridge.callHandler('facebook_share', 'http://www.dojo4.com', function(result){
+          if (result)
+            bridge.callHandler('alert', 'Successful share on Facebook.');
+        });
+      });
+
+      document.getElementById('twitterShareBtn').addEventListener('click', function(){
+        bridge.callHandler('twitter_share', 'http://www.dojo4.com', function(result){
+          if (result)
+            bridge.callHandler('alert', 'Successful share on Twitter.');
+        });
+      });
+
   }, false)
   </script>
 </head>
 <body>
 
 <h1> Hellllooo!! </h1>
+
+<button id="facebookShareBtn">Share awesome on Facebook</button>
+<button id="twitterShareBtn">Share awesome on Twitter</button>
 
 </body>
 </html>

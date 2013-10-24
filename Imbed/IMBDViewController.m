@@ -7,6 +7,10 @@
 //
 
 #import "IMBDViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+#import <Twitter/Twitter.h>
 
 @interface IMBDViewController ()
 
@@ -71,6 +75,64 @@
             NSString *deviceName = [[UIDevice currentDevice] name];
             NSLog(@"Returning getDeviceName handler call with name = %@", deviceName);
             responseCallback(deviceName);
+        }];
+        
+        // FACEBOOK SHARE
+        // ** For this to work, you need to finish Facebook SDK setup for your specific app (https://developers.facebook.com/docs/ios/getting-started/)
+        [_bridge registerHandler:@"facebook_share" handler:^(id data, WVJBResponseCallback responseCallback) {
+            NSLog(@"facebook_share called: %@", data);
+            
+            void (^fbHandler)(FBAppCall *call, NSDictionary *results, NSError *error) = ^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                if (!error) {
+                    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+                    UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:appName message:@"Facebook sharing failed. Please try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                    [errorAlert show];
+                    responseCallback([NSString stringWithFormat:@"facebook failed with error: ", [error description]]);
+                } else {
+                    responseCallback(@"share successful on facebook");
+                }
+            };
+            
+            FBAppCall *appCall = [FBDialogs presentShareDialogWithLink:[NSURL URLWithString:data] handler:fbHandler];
+            
+            if (!appCall) {
+                FBOSIntegratedShareDialogHandler fbHandler = ^(FBOSIntegratedShareDialogResult result, NSError *error) {
+                    responseCallback(@"share successful on facebook");
+                };
+                // Next try to post using Facebook's iOS6 integration
+                BOOL displayedNativeDialog = [FBDialogs presentOSIntegratedShareDialogModallyFrom:self
+                                                                                      initialText:nil
+                                                                                            image:nil
+                                                                                              url:[NSURL URLWithString:data]
+                                                                                          handler:fbHandler];
+            }
+        }];
+        
+        // TWITTER SHARE
+        [_bridge registerHandler:@"twitter_share" handler:^(id data, WVJBResponseCallback responseCallback) {
+            NSLog(@"twitter_share called: %@", data);
+            
+            // if Social Accounts (iOS6) is available, use it
+            if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+                SLComposeViewController *twitter = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+                [twitter setInitialText:@"I'm sending tweets from JS code through native iOS twitter sharing, because I'm a boss."];
+                [twitter addURL:[NSURL URLWithString:data]];
+                twitter.completionHandler = ^(SLComposeViewControllerResult result) {
+                    responseCallback(@"share successful on twitter");
+                    [twitter dismissViewControllerAnimated:NO completion:nil];
+                };
+                [self presentViewController:twitter animated:YES completion:nil];
+            } else {
+                // iOS5
+                TWTweetComposeViewController *twitter = [[TWTweetComposeViewController alloc] init];
+                [twitter setInitialText:@"I'm sending tweets from JS code through native iOS twitter sharing, because I'm a boss."];
+                [twitter addURL:[NSURL URLWithString:@"http://www.dojo4.com"]];
+                twitter.completionHandler = ^(SLComposeViewControllerResult result) {
+                    responseCallback(@"share successful on twitter");
+                    [twitter dismissViewControllerAnimated:NO completion:nil];
+                };
+                [self presentViewController:twitter animated:YES completion:nil];
+            }
         }];
     }
 }

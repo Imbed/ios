@@ -17,10 +17,14 @@ Instead of learning a third party framework like Phonegap and hoping they have s
 
 ### Rake tasks
 
+1. `bundle install`
+2. `bundle exec rake -T`
+3. `bundle exec rake build`
+
 Lots of automation here:
 
 ```
-rake ios:build                   # Build the cordova application
+rake ios:build                   # Build the application
 rake ios:build_static            # Builds content from /static and copies it into the iOS app
 rake ios:clean                   # Clean the build
 rake ios:deploy                  # Upload ipa to testflight

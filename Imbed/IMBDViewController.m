@@ -11,6 +11,7 @@
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
+#import <MessageUI/MessageUI.h>
 
 @interface IMBDViewController ()
 
@@ -134,6 +135,36 @@
                 [self presentViewController:twitter animated:YES completion:nil];
             }
         }];
+        
+        // Send an email
+        [_bridge registerHandler:@"sendEmail" handler:^(id data, WVJBResponseCallback responseCallback) {
+            // data is a string of the email
+            if (data) {
+                NSLog(@"About to send an email to %@", data);
+                // stuff we need
+                MFMailComposeViewController *emailComposer = [[MFMailComposeViewController alloc] init];
+                NSDictionary *mainInfoDict = [[NSBundle mainBundle] infoDictionary];
+                
+                // set email composer's delegate to self so that we can dismiss it...
+                emailComposer.mailComposeDelegate = self;
+                
+                // set to recipients
+                NSArray *toRecipients = [NSArray arrayWithObjects:data, nil];
+                [emailComposer setToRecipients:toRecipients];
+                
+                // set subject line
+                NSString *appName = [mainInfoDict objectForKey:@"CFBundleDisplayName"];
+                [emailComposer setSubject:[NSString stringWithFormat:@"Feedback on %@", appName]];
+                
+                // set body to template with app and device info
+                NSString *appVersion = [mainInfoDict objectForKey:@"CFBundleShortVersionString"];
+                NSString *iosVersion = [[UIDevice currentDevice] systemVersion];
+                NSString *body = [NSString stringWithFormat:@"\n\n\n\n\n\n\n--------\nApp Version = %@\niOS Version = %@", appVersion, iosVersion];
+                [emailComposer setMessageBody:body isHTML:NO];
+                
+                [self presentModalViewController:emailComposer animated:YES];
+            }
+        }];
     }
 }
 
@@ -156,6 +187,14 @@
 - (void)loadPage:(UIWebView*)webView {
     NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"www"]];
     [webView loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
+# pragma mark - Mail Delegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

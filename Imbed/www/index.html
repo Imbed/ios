@@ -38,6 +38,10 @@
         });
       });
 
+      document.getElementById('emailBtn').addEventListener('click', function(){
+        bridge.callHandler('sendEmail', 'miles@dojo4.com');
+      });
+
   }, false)
   </script>
 </head>
@@ -47,6 +51,7 @@
 
 <button id="facebookShareBtn">Share awesome on Facebook</button>
 <button id="twitterShareBtn">Share awesome on Twitter</button>
+<button id="emailBtn">Send email to dojo4</button>
 
 </body>
 </html>

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "WebViewJavascriptBridge.h"
+#import <MessageUI/MessageUI.h>
 
-@interface IMBDViewController : UIViewController <UIAlertViewDelegate>
+@interface IMBDViewController : UIViewController <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) WebViewJavascriptBridge *javascriptBridge;

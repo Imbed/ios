@@ -8,9 +8,10 @@ Instead of learning a third party framework like Phonegap and hoping they have s
 
 ### Usage
 
-1. Follow examples to use [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge)
-2. Put your web content in Imbed/www
-3. Run through Xcode or the rake tasks below
+1. `pod install`
+2. Follow examples to use [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge)
+3. Put your web content in Imbed/www
+4. Run through Xcode (always open the workspace, not the project) or the rake tasks below
 
 ### Rake tasks
 

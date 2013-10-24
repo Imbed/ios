@@ -1,0 +1,13 @@
+PODS:
+  - Facebook-iOS-SDK (3.8.0)
+  - TestFlightSDK (2.1.1-beta)
+
+DEPENDENCIES:
+  - Facebook-iOS-SDK (~> 3.8.0)
+  - TestFlightSDK (~> 2.0)
+
+SPEC CHECKSUMS:
+  Facebook-iOS-SDK: 55a22fe8bcaacd638cde9014af6b3ee85f4d71fb
+  TestFlightSDK: dea28c16f0bf65c49c4ed8939b2ae0b0ed9bf8b0
+
+COCOAPODS: 0.26.2

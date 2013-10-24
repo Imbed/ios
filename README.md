@@ -1,6 +1,6 @@
 # imbed
 
-This is a starting point for using web content in an iOS app, complete with rake tasks and pre-written handlers for common iOS tasks.
+This is a starting point for using web content in an iOS app, complete with rake tasks and pre-written handlers for common iOS tasks. See [our announcement post](http://dojo4.com/blog/announcing-imbed-the-best-way-to-use-web-content-in-an-i-os-app).
 
 ### Architecture
 

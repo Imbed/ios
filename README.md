@@ -13,6 +13,8 @@ Instead of learning a third party framework like Phonegap and hoping they have s
 3. Put your web content in Imbed/www
 4. Run through Xcode (always open the workspace, not the project) or the rake tasks below
 
+(When you make changes to your web content, either test it in Chrome and then setup a `rake build_static` task to remove all files and copy yours back into the project, or do a `Clean` in Xcode before building again.)
+
 ### Rake tasks
 
 Lots of automation here:

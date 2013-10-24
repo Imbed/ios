@@ -15,6 +15,14 @@
       });
 
       bridge.callHandler('testflightLog', 'WebViewJavascriptBridgeReady event occurred. Ready to rock...');
+
+      bridge.callHandler('confirm', 'Would you like to see your device name?', function(answer){
+        if (answer) {
+          bridge.callHandler('getDeviceName', {}, function(deviceName){
+            bridge.callHandler('alert', 'Your device name is = ' + deviceName);
+          });
+        }
+      });
   }, false)
   </script>
 </head>

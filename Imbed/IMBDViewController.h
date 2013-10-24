@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WebViewJavascriptBridge.h"
 
-@interface IMBDViewController : UIViewController
+@interface IMBDViewController : UIViewController <UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) WebViewJavascriptBridge *javascriptBridge;

@@ -9,7 +9,7 @@ Instead of learning a third party framework like Phonegap and hoping they have s
 ### Usage
 
 1. `pod install`
-2. Follow examples to use [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge)
+2. Follow examples to use [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge) in your JS and ObjC code.
 3. Put your web content in Imbed/www
 4. Run through Xcode (always open the workspace, not the project) or the rake tasks below
 

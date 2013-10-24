@@ -14,16 +14,39 @@
 
 @implementation IMBDViewController
 
+@synthesize webView = _webView;
+@synthesize javascriptBridge = _bridge;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    // initialize WebViewJavascriptBridge and the app's UIWebView
+    [WebViewJavascriptBridge enableLogging];
+    
+    _bridge = [WebViewJavascriptBridge bridgeForWebView:_webView handler:^(id data, WVJBResponseCallback responseCallback) {
+        NSLog(@"ObjC received message from JS: %@", data);
+        responseCallback(@"Response for message from ObjC");
+    }];
+    
+    [self registerHandlers];
+    [self loadPage:_webView];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)registerHandlers {
+    if (_bridge) {
+        
+        // Testflight logging
+        [_bridge registerHandler:@"testflightLog" handler:^(id data, WVJBResponseCallback responseCallback) {
+            NSLog([NSString stringWithFormat:@"[From JS]: %@", data]);
+        }];
+        
+    }
+}
+
+- (void)loadPage:(UIWebView*)webView {
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"www"]];
+    [webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 @end

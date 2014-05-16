@@ -2,6 +2,19 @@
 
 This is a starting point for using web content in an iOS app, complete with rake tasks and pre-written handlers for common iOS tasks. See [our announcement post](http://dojo4.com/blog/announcing-imbed-the-best-way-to-use-web-content-in-an-i-os-app).
 
+## Required Reading
+
+If you're completely new to iOS development, follow this tutorial from Apple:
+
+[Start Developing iOS Apps Today](https://developer.apple.com/library/IOS/referencelibrary/GettingStarted/RoadMapiOS/index.html)
+
+and then read
+
+[WebViewJavascriptBridge README](https://github.com/marcuswestin/WebViewJavascriptBridge/blob/master/README.md).
+
+You'll then have the knowledge to understand the architecture and purpose of this project.
+
+
 ### Architecture
 
 Instead of learning a third party framework like Phonegap and hoping they have support for the features we wanted, we decided to use a simple open source framework to bridge JS in the webview and native code, so we could write the features we wanted in Objective C in the way Apple recommends. We're using Marcus Westin's great [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge) as our bridge to allow function calls between the two environments.

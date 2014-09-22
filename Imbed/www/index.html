@@ -14,7 +14,7 @@
           console.log("Javascript got its response", responseData);
       });
 
-      bridge.callHandler('testflightLog', 'WebViewJavascriptBridgeReady event occurred. Ready to rock...');
+      bridge.callHandler('iosLog', 'WebViewJavascriptBridgeReady event occurred. Ready to rock...');
 
       bridge.callHandler('confirm', 'Would you like to see your device name?', function(answer){
         if (answer === "true") {

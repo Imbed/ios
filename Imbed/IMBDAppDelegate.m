@@ -7,14 +7,11 @@
 //
 
 #import "IMBDAppDelegate.h"
-#import "TestFlight.h"
 
 @implementation IMBDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // [TestFlight takeOff:@"your app token here"];
-    
+{    
     // Override point for customization after application launch.
     return YES;
 }

@@ -43,8 +43,7 @@
 - (void)registerHandlers {
     if (_bridge) {
         
-        // Testflight logging
-        [_bridge registerHandler:@"testflightLog" handler:^(id data, WVJBResponseCallback responseCallback) {
+        [_bridge registerHandler:@"iosLog" handler:^(id data, WVJBResponseCallback responseCallback) {
             NSLog([NSString stringWithFormat:@"[From JS]: %@", data]);
         }];
         

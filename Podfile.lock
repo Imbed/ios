@@ -2,18 +2,15 @@ PODS:
   - Bolts (1.1.2)
   - Facebook-iOS-SDK (3.18.0):
     - Bolts
-  - TestFlightSDK (2.1.1-beta)
   - WebViewJavascriptBridge (4.0.1)
 
 DEPENDENCIES:
   - Facebook-iOS-SDK (~> 3.18)
-  - TestFlightSDK (~> 2.0)
   - WebViewJavascriptBridge (~> 4.0.1)
 
 SPEC CHECKSUMS:
   Bolts: 2635e8698a630774689441047f3465d78c48d485
   Facebook-iOS-SDK: fa12c51cc57bfb6f92e47793c9d4d2c65bc92741
-  TestFlightSDK: 0a3f6725f6dc7c1598ed3048bc84c4fd4e58b993
   WebViewJavascriptBridge: 2b464833619ac73a7b7c0561a669e75ef346db9e
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1
